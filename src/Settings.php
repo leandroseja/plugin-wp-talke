@@ -11,12 +11,14 @@ class Settings
 
     public function addMenu(): void
     {
-        add_options_page(
+        add_menu_page(
             __('Talke CRM', 'talke-crm'),
             __('Talke CRM', 'talke-crm'),
             'manage_options',
             'talke-crm',
-            [$this, 'renderPage']
+            [$this, 'renderPage'],
+            TALKE_CRM_URL . 'assets/icon-256x256.png',
+            58
         );
     }
 
@@ -29,7 +31,7 @@ class Settings
         // Handle disconnect action first
         if (($_GET['action'] ?? '') === 'disconnect' && check_admin_referer('talke_crm_disconnect')) {
             TokenStore::deleteToken();
-            wp_safe_redirect(admin_url('options-general.php?page=talke-crm&disconnected=1'));
+            wp_safe_redirect(admin_url('admin.php?page=talke-crm&disconnected=1'));
             exit;
         }
 
@@ -41,7 +43,7 @@ class Settings
 
             if (TokenStore::validateState($state)) {
                 TokenStore::saveToken($token, $contextName);
-                wp_safe_redirect(admin_url('options-general.php?page=talke-crm&connected=1'));
+                wp_safe_redirect(admin_url('admin.php?page=talke-crm&connected=1'));
                 exit;
             }
             wp_die(esc_html__('Token inválido ou expirado. Tente conectar de novo.', 'talke-crm'));
@@ -67,7 +69,7 @@ class Settings
                 esc_html($contextName ?: '')
             );
             $disconnectUrl = wp_nonce_url(
-                admin_url('options-general.php?page=talke-crm&action=disconnect'),
+                admin_url('admin.php?page=talke-crm&action=disconnect'),
                 'talke_crm_disconnect'
             );
             echo '<a href="' . esc_url($disconnectUrl) . '" class="button">' . esc_html__('Desconectar', 'talke-crm') . '</a>';

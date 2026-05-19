@@ -7,7 +7,7 @@ class Connection
     public static function buildAuthorizeUrl(): string
     {
         $state = TokenStore::generateState();
-        $returnUrl = admin_url('options-general.php?page=talke-crm');
+        $returnUrl = admin_url('admin.php?page=talke-crm');
 
         return add_query_arg([
             'state'      => $state,
