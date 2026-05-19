@@ -17,7 +17,7 @@ class Settings
             'manage_options',
             'talke-crm',
             [$this, 'renderPage'],
-            TALKE_CRM_URL . 'assets/icon-256x256.png',
+            TALKE_CRM_URL . 'assets/menu-icon.png',
             58
         );
     }
