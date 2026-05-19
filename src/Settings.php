@@ -7,6 +7,7 @@ class Settings
     public function register(): void
     {
         add_action('admin_menu', [$this, 'addMenu']);
+        add_action('admin_init', [$this, 'handleActions']);
     }
 
     public function addMenu(): void
@@ -22,13 +23,16 @@ class Settings
         );
     }
 
-    public function renderPage(): void
+    public function handleActions(): void
     {
-        if (!current_user_can('manage_options')) {
+        if (!is_admin() || !current_user_can('manage_options')) {
+            return;
+        }
+        if (($_GET['page'] ?? '') !== 'talke-crm') {
             return;
         }
 
-        // Handle disconnect action first
+        // Disconnect
         if (($_GET['action'] ?? '') === 'disconnect' && check_admin_referer('talke_crm_disconnect')) {
             TokenStore::deleteToken();
             wp_safe_redirect(admin_url('admin.php?page=talke-crm&disconnected=1'));
@@ -47,6 +51,13 @@ class Settings
                 exit;
             }
             wp_die(esc_html__('Token inválido ou expirado. Tente conectar de novo.', 'talke-crm'));
+        }
+    }
+
+    public function renderPage(): void
+    {
+        if (!current_user_can('manage_options')) {
+            return;
         }
 
         $connected = TokenStore::isConnected();
