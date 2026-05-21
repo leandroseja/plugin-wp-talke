@@ -2,6 +2,10 @@
 
 namespace TalkeCRM;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class Plugin
 {
     private static ?Plugin $instance = null;
@@ -13,8 +17,6 @@ class Plugin
 
     public function boot(): void
     {
-        load_plugin_textdomain('talke-crm', false, dirname(plugin_basename(TALKE_CRM_FILE)) . '/languages');
-
         if (is_admin()) {
             (new Settings())->register();
         }

@@ -2,6 +2,10 @@
 
 namespace TalkeCRM\Modules;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use TalkeCRM\Api;
 
 class WooModule
