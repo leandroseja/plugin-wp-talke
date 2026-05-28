@@ -61,15 +61,16 @@ This plugin connects to the **Talke CRM** service (operated by Talke, at `https:
 
 **What data is sent:**
 
-* During the initial authorization (OAuth-like): site URL (`home_url()`) and site name (`get_bloginfo('name')`).
+* During the initial authorization (OAuth-like): site URL (`home_url()`) and site name (`get_bloginfo('name')`) are passed as query parameters when the admin is redirected to Talke CRM.
 * On every lead capture (Elementor Pro / WooCommerce / tracker JS): name, email, phone filled in the form, page URL, UTM parameters, referrer, and a non-PII browser fingerprint used for deduplication.
-* On WooCommerce orders: order data (items, total, status) and customer data.
+* On WooCommerce orders: customer data (name, email, phone) and order summary (order ID, total, number of items).
+* When the tracker script is loaded by the browser: standard HTTP request headers (User-Agent, Referer, IP) reach the Talke CRM server, the same way any third-party JavaScript request does.
 
 **Endpoints contacted:**
 
-* `https://crm.talke.com.br/integrations/wordpress/authorize` (initial authorization)
-* `https://crm.talke.com.br/api/capture` (lead capture)
-* `https://crm.talke.com.br/api/orders` (WooCommerce orders)
+* `https://crm.talke.com.br/integrations/wordpress/authorize` — browser redirect during the initial authorization (started by the admin clicking "Connect with Talke CRM").
+* `https://crm.talke.com.br/api/capture` — server-to-server POST request used for every lead capture (Elementor Pro form submissions, WooCommerce new orders, WooCommerce new customers).
+* `https://crm.talke.com.br/tracker.js` — front-end tracker script loaded on every public page via `wp_enqueue_script` once the site is connected. The script captures form submissions and page views from the visitor's browser.
 
 **Service provided by:** Talke.
 
