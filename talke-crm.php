@@ -3,7 +3,7 @@
  * Plugin Name:       Talke CRM
  * Plugin URI:        https://github.com/leandroseja/plugin-wp-talke
  * Description:       Captura leads do seu site WordPress automaticamente para o Talke CRM. Inclui tracker, formulários do Elementor e WooCommerce.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Talke
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('TALKE_CRM_VERSION', '1.0.0');
+define('TALKE_CRM_VERSION', '1.0.1');
 define('TALKE_CRM_FILE', __FILE__);
 define('TALKE_CRM_DIR', plugin_dir_path(__FILE__));
 define('TALKE_CRM_URL', plugin_dir_url(__FILE__));

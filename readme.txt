@@ -4,7 +4,7 @@ Tags: crm, lead capture, elementor, woocommerce, marketing
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,10 @@ This plugin does not send any data to external servers before the administrator 
 
 == Changelog ==
 
+= 1.0.1 =
+* Fix Plugin URI to point to the correct public repository (https://github.com/leandroseja/plugin-wp-talke)
+* Document the external Talke CRM service in the readme (data sent, endpoints, Terms of Service and Privacy Policy links)
+
 = 1.0.0 =
 * Initial release
 * Tracker injected via wp_enqueue_script
@@ -91,6 +95,9 @@ This plugin does not send any data to external servers before the administrator 
 * Retry queue with wp_cron
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Addresses the WordPress.org plugin review feedback: corrected Plugin URI and added the External services / Privacy disclosure section.
 
 = 1.0.0 =
 Initial plugin release.
